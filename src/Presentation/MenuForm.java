@@ -11,7 +11,7 @@ import javax.swing.JPanel;
 public class MenuForm extends JPanel
 {
 	
-	private BufferedImage backgroundImage, knopImage;
+	private BufferedImage backgroundImage, knopImage, smallKnopImage;
 	private final int MAIN = 0, OPTIES = 1, HANDLEIDING = 2, SPELEN = 3, NIEUW = 4, LADEN = 5;
 	private int LOCATIE;
 	private ArrayList<Knop> knoppen = new ArrayList<Knop>();
@@ -25,6 +25,7 @@ public class MenuForm extends JPanel
 		setLayout(null);
 		backgroundImage = createBufferedImage(new ImageIcon(this.getClass().getResource("../images/backgroundMenuBox.png")).getImage());
 		knopImage = createBufferedImage(new ImageIcon(this.getClass().getResource("../images/knop.png")).getImage());
+		smallKnopImage = createBufferedImage(new ImageIcon(this.getClass().getResource("../images/smallKnop.png")).getImage());
 		setMenu(MAIN);
 		
 	}
@@ -39,28 +40,29 @@ public class MenuForm extends JPanel
 		switch(LOCATIE) //Menu knoppen
 		{
 		case MAIN:
-			addKnop("Spelen", SPELEN, 150, 150);
-			addKnop("Opties", OPTIES, 150, 250);
-			addKnop("Handleiding", HANDLEIDING, 150, 350);
+			addKnop("Spelen", SPELEN, 150, 150, knopImage);
+			addKnop("Opties", OPTIES, 150, 250, knopImage);
+			addKnop("Handleiding", HANDLEIDING, 150, 350, knopImage);
 			break;
 		case SPELEN:
-			addKnop("Nieuw spel", NIEUW, 150, 200);
-			addKnop("Spel laden", LADEN, 150, 300);
+			addKnop("Nieuw spel", NIEUW, 150, 200, knopImage);
+			addKnop("Spel laden", LADEN, 150, 300, knopImage);
+			addKnop("Terug", MAIN, 100, 450, smallKnopImage);
 			break;
 		default: //Main menu
-			addKnop("Spelen", SPELEN, 150, 150);
-			addKnop("Opties", OPTIES, 150, 250);
-			addKnop("Handleiding", HANDLEIDING, 150, 350);
+			addKnop("Spelen", SPELEN, 150, 150, knopImage);
+			addKnop("Opties", OPTIES, 150, 250, knopImage);
+			addKnop("Handleiding", HANDLEIDING, 150, 350, knopImage);
 			break;
 		}
 		repaint();
 		
 	}
 
-	private void addKnop(String naam, int action, int x, int y)
+	private void addKnop(String naam, int action, int x, int y, BufferedImage img)
 	{
 		
-		Knop knop = new Knop(this, knopImage, action, naam, x, y);
+		Knop knop = new Knop(this, img, action, naam, x, y);
 		knoppen.add(knop);
 		add(knop);
 		
@@ -88,9 +90,7 @@ public class MenuForm extends JPanel
 
 	public void doAction(int action)
 	{
-		
 		setMenu(action);
-		
 	}
 
 }

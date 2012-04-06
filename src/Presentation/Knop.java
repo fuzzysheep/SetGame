@@ -52,20 +52,22 @@ public class Knop extends JPanel implements MouseListener
 		g.drawImage(img, 0, 0, this);
 		g.setFont(font);
 		g.setColor(Color.BLACK);
-		g.drawString(naam.toUpperCase(), (250-((naam.length()*12)/2)), 33);
+		g.drawString(naam.toUpperCase(), ((img.getWidth()/2)-((naam.length()*12)/2)), img.getHeight()/2+5);
 
 	}
 
 	public void mouseClicked(MouseEvent e)
 	{
-		
 		menuForm.doAction(action);
-		
+	}
+	
+	public void mouseReleased(MouseEvent e)
+	{
+		menuForm.doAction(action);
 	}
 	
 	public void mouseExited(MouseEvent e)	{}
 	public void mouseEntered(MouseEvent e)	{}
 	public void mousePressed(MouseEvent e)	{}
-	public void mouseReleased(MouseEvent e)	{}
 
 }
