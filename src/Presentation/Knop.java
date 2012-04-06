@@ -33,7 +33,7 @@ public class Knop extends JPanel implements MouseListener
 		this.action = action;
 		try
 		{
-			font = Font.createFont(Font.TRUETYPE_FONT, this.getClass().getResource("../images/Harabara.ttf").openStream());
+			font = Font.createFont(Font.TRUETYPE_FONT, this.getClass().getResource("../res/Harabara.ttf").openStream());
 			font = font.deriveFont(Font.BOLD, 24);
 		} catch (FontFormatException e)
 		{
@@ -52,7 +52,7 @@ public class Knop extends JPanel implements MouseListener
 		g.drawImage(img, 0, 0, this);
 		g.setFont(font);
 		g.setColor(Color.BLACK);
-		g.drawString(naam.toUpperCase(), ((img.getWidth()/2)-((naam.length()*12)/2)), img.getHeight()/2+5);
+		g.drawString(naam.toUpperCase(), ((img.getWidth()/2)-((naam.length()*12)/2)), img.getHeight()/2+7);
 
 	}
 

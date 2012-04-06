@@ -3,10 +3,18 @@ package Presentation;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 
 public class MenuForm extends JPanel
 {
@@ -15,6 +23,7 @@ public class MenuForm extends JPanel
 	private final int MAIN = 0, OPTIES = 1, HANDLEIDING = 2, SPELEN = 3, NIEUW = 4, LADEN = 5;
 	private int LOCATIE;
 	private ArrayList<Knop> knoppen = new ArrayList<Knop>();
+	private String Handleiding = "";
 	
 	public MenuForm()
 	{
@@ -26,6 +35,22 @@ public class MenuForm extends JPanel
 		backgroundImage = createBufferedImage(new ImageIcon(this.getClass().getResource("../images/backgroundMenuBox.png")).getImage());
 		knopImage = createBufferedImage(new ImageIcon(this.getClass().getResource("../images/knop.png")).getImage());
 		smallKnopImage = createBufferedImage(new ImageIcon(this.getClass().getResource("../images/smallKnop.png")).getImage());
+		InputStream in = this.getClass().getResourceAsStream("../res/handleiding.txt");
+		BufferedReader br;
+		try
+		{
+			br = new BufferedReader(new InputStreamReader(in, "UTF-8"));
+			String buffer;
+			while ((buffer = br.readLine()) != null) {
+				Handleiding = Handleiding + buffer;
+			}
+		} catch (UnsupportedEncodingException e)
+		{
+			e.printStackTrace();
+		} catch (IOException e)
+		{
+			e.printStackTrace();
+		}
 		setMenu(MAIN);
 		
 	}
@@ -53,6 +78,15 @@ public class MenuForm extends JPanel
 			addKnop("Terug", MAIN, 100, 450, smallKnopImage);
 			break;
 		case HANDLEIDING:
+			JTextArea handleiding = new JTextArea();
+			handleiding.setEditable(false);
+			handleiding.setText(this.getClass().getResourceAsStream("../res/handleiding.txt").toString());
+			handleiding.setBounds(150, 150, 475, 250);
+			handleiding.setText(Handleiding);
+			handleiding.setWrapStyleWord(true);
+			handleiding.setLineWrap(true);
+			JScrollPane scrollPane = new JScrollPane(handleiding, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+			add(handleiding);
 			addKnop("Terug", MAIN, 100, 450, smallKnopImage);
 			break;
 		default: //Main menu
