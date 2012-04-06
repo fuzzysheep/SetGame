@@ -49,6 +49,12 @@ public class MenuForm extends JPanel
 			addKnop("Spel laden", LADEN, 150, 300, knopImage);
 			addKnop("Terug", MAIN, 100, 450, smallKnopImage);
 			break;
+		case OPTIES:
+			addKnop("Terug", MAIN, 100, 450, smallKnopImage);
+			break;
+		case HANDLEIDING:
+			addKnop("Terug", MAIN, 100, 450, smallKnopImage);
+			break;
 		default: //Main menu
 			addKnop("Spelen", SPELEN, 150, 150, knopImage);
 			addKnop("Opties", OPTIES, 150, 250, knopImage);
